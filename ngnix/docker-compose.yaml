@@ -1,18 +1,39 @@
-version: '3'
+version: "3.1"
 services:
-  nginx:
-   container_name: nginx-mtls
-   image: nginx:1.20
-   restart: always
-   ports:
-   - 8080:80
-   volumes:
-   - ./conf.d:/etc/nginx/conf.d
-
+  PostgreSQL:
+    container_name: postgres-ms
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    healthcheck:
+      interval: 10s
+      retries: 5
+      test:
+        - CMD-SHELL
+        - "pg_isready -U postgres"
+      timeout: 5s
+    image: postgres
+    ports:
+      - "5432:5432"
   app:
+    container_name: app-mtls
+    image: "nginx:1.20"
+    ports:
+      - "80:80"
     restart: always
-    image: springboot:1.20
-    expose:
-      - "8080"
+  nginx:
+    container_name: nginx-mtls
     depends_on:
-      - nginx
+      - app
+    environment:
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/postgres"
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    image: "nginx:1.20"
+    ports:
+      - "8080:80"
+    restart: always
+    volumes:
+      - "./ngnix/conf.d:/etc/nginx/conf.d"
