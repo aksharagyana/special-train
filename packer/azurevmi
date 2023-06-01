@@ -1,0 +1,63 @@
+{
+  "variables": {
+    "client_id": "",
+    "client_secret": "",
+    "subscription_id": "",
+    "tenant_id": ""
+  },
+  "builders": [
+    {
+      "type": "azure-arm",
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "subscription_id": "{{user `subscription_id`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "managed_image_resource_group_name": "packer-rg",
+      "managed_image_name": "rhel-java8",
+      "os_type": "Linux",
+      "image_publisher": "RedHat",
+      "image_offer": "RHEL",
+      "image_sku": "7.8",
+      "location": "eastus",
+      "azure_tags": {
+        "Dept": "Engineering",
+        "Task": "Packer"
+      },
+      "ssh_username": "root",
+      "ssh_password": "P@ssw0rd!",
+      "communicator": "ssh",
+      "ssh_timeout": "10m",
+      "vm_size": "Standard_DS2_v2",
+      "custom_managed_image_name": "rhel-java8-custom",
+      "custom_managed_image_tags": {
+        "PackerBuild": "RHEL with Java 8"
+      },
+      "copy_files": [
+        {
+          "source": "scripts/install_java.sh",
+          "destination": "/tmp/install_java.sh"
+        }
+      ],
+      "custom_data_file": "scripts/cloud-init.txt",
+      "inline_shebang": "/bin/sh -e",
+      "azure_resource_group_name": "packer-rg",
+      "os_disk_size_gb": 128,
+      "managed_image_gallery": {
+        "subscription_id": "{{user `subscription_id`}}",
+        "resource_group_name": "my-gallery-rg",
+        "gallery_name": "my-gallery",
+        "image_definition": "rhel-base",
+        "image_version": "1.0.0"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "chmod +x /tmp/install_java.sh",
+        "/tmp/install_java.sh"
+      ]
+    }
+  ]
+}
