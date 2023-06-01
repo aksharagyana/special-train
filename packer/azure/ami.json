@@ -1,9 +1,11 @@
 {
   "variables": {
-    "client_id": "",
-    "client_secret": "",
-    "subscription_id": "",
-    "tenant_id": ""
+    "subscription_id": "{{env `AZURE_SUBSCRIPTION_ID`}}",
+    "client_id": "{{env `AZURE_CLIENT_ID`}}",
+    "client_secret": "{{env `AZURE_CLIENT_SECRET`}}",
+    "tenant_id": "{{env `AZURE_TENANT_ID`}}",
+    "resource_group": "{{env `AZURE_RESOURCE_GROUP`}}",
+    "location": "{{env `AZURE_LOCATION`}}"
   },
   "builders": [
     {
