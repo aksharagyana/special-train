@@ -1,0 +1,8 @@
+- name: Allow inbound traffic on port 8082
+  win_firewall_rule:
+    name: "Allow Port 8082"
+    localport: 8082
+    direction: in
+    action: allow
+    protocol: tcp
+    enabled: yes
