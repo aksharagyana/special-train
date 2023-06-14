@@ -1,0 +1,5 @@
+keytool -genkey -alias myalias -keyalg RSA -keystore mykeystore.jks
+
+keytool -import -alias myalias -file mycertificate.crt -keystore mykeystore.jks
+
+keytool -list -v -keystore mykeystore.jks
