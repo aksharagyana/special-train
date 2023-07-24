@@ -8,14 +8,15 @@ Start-Process powershell.exe -ArgumentList "-File `"$scriptPath`"" -NoNewWindow 
 
 $progId = "ChromeHTML"
 $urls = "ftp", "http", "https"
+$regProperty = "ProgId"
 
 foreach ($url in $urls) {
     $regKey = "HKLM:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\$url\UserChoice"
-    Set-ItemProperty $regKey -name ProgId $progId
+    Set-ItemProperty -Path $regKey -Name $regProperty -Value "ChromeHTML"
 
     # Set the same value for the current user
     $regKey = "HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\$url\UserChoice"
-    Set-ItemProperty $regKey -name ProgId $progId
+    Set-ItemProperty -Path $regKey -Name $regProperty -Value "ChromeHTML"
 }
 
 Write-Host "Google Chrome is now the default browser for all users."
@@ -27,6 +28,6 @@ $regKeyFtp = $regKey -f 'ftp'
 $regKeyHttp = $regKey -f 'http'
 $regKeyHttps = $regKey -f 'https'
 
-Set-ItemProperty $regKeyFtp -name ProgId ChromeHTML
-Set-ItemProperty $regKeyHttp -name ProgId ChromeHTML
-Set-ItemProperty $regKeyHttps -name ProgId ChromeHTML
+Set-ItemProperty -Path $regKeyFtp -Name ProgId -Value "ChromeHTML"
+Set-ItemProperty -Path $regKeyHttp -Name ProgId -Value "ChromeHTML"
+Set-ItemProperty -Path $regKeyHttps -Name ProgId -Value "ChromeHTML"
