@@ -125,3 +125,22 @@ Set-ItemProperty -Path $regKeyPath -Name $regValueName -Value $regValueData -Typ
 # Restart the computer for the changes to take effect
 Restart-Computer
 
+
+
+# Script to programmatically add files to Windows PowerShell logon scripts for local computer GPO on Windows 11
+
+# Import the GroupPolicyManagement module
+Import-Module GroupPolicyManagement
+
+# Get the path to the GPO that you want to modify
+$gpo = Get-GPO "Local Computer Policy"
+
+# Get the list of logon scripts that are currently configured for the GPO
+$logonScripts = $gpo.GetSettings("User", "Scripts", "Logon")
+
+# Add the path to the file that you want to add to the list of logon scripts
+$logonScripts.Add("C:\Path\To\Your\File.ps1")
+
+# Save the changes to the GPO
+$gpo.CommitChanges()
+
