@@ -62,6 +62,15 @@ foreach ($userProfile in $userProfiles) {
 Write-Output "File copied to each user's desktop."
 
 
+$sourcePath = "C:\Temp\myfile.txt"
+$destinationPath = "$env:USERPROFILE\Desktop\myfile.txt"
+
+Copy-Item $sourcePath $destinationPath
+
+Write-Host "The file has been copied to the user desktop."
+
+
+
 # Define the name of the new Group Policy Object
 $gpoName = "MyLoginScriptGPO"
 
