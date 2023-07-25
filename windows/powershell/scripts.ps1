@@ -46,6 +46,20 @@ $value = '\\NetworkShare\EDGE\defaultapplication.XML'
 
 New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
 
+# Define the source file path (file to be copied)
+$sourceFilePath = "C:\Path\To\Your\File.txt"
+
+# Get a list of user profiles on the computer
+$userProfiles = Get-WmiObject Win32_UserProfile | Where-Object { $_.Special -eq $false }
+
+# Copy the file to each user's desktop
+foreach ($userProfile in $userProfiles) {
+    $desktopPath = Join-Path -Path $userProfile.LocalPath -ChildPath "Desktop"
+    $destinationFilePath = Join-Path -Path $desktopPath -ChildPath (Split-Path $sourceFilePath -Leaf)
+    Copy-Item -Path $sourceFilePath -Destination $destinationFilePath -Force
+}
+
+Write-Output "File copied to each user's desktop."
 
 
 # Define the name of the new Group Policy Object
