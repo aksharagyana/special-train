@@ -101,3 +101,27 @@ $gpo.Save()
 # Invoke-GPUpdate -Computer "Computer1", "Computer2" -RandomDelayInMinutes 0
 
 Write-Output "Group Policy '$gpoName' has been applied and will run the script during user logon."
+
+
+
+
+
+
+
+# Script to add a script to logon scripts for local computer on Windows 11
+
+# Define the path to the PowerShell script to run during logon
+$scriptPath = "C:\Path\To\Your\Script.ps1"
+
+# Set the registry value to execute the PowerShell script during logon
+$regKeyPath = "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce\0"
+$regValueName = "Script"
+$regValueType = "String"
+$regValueData = $scriptPath
+
+# Set the registry value in the local computer policy
+Set-ItemProperty -Path $regKeyPath -Name $regValueName -Value $regValueData -Type $regValueType
+
+# Restart the computer for the changes to take effect
+Restart-Computer
+
