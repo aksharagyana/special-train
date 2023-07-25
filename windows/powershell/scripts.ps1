@@ -45,3 +45,33 @@ $Name = "DefaultAssociationsConfiguration"
 $value = '\\NetworkShare\EDGE\defaultapplication.XML'
 
 New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
+
+
+
+# Define the name of the new Group Policy Object
+$gpoName = "MyLoginScriptGPO"
+
+# Define the path to the PowerShell script to run during logon
+$scriptPath = "C:\Path\To\Your\ShortcutCreationScript.ps1"
+
+# Create a new Group Policy Object
+$gpo = New-GPO -Name $gpoName
+
+# Link the GPO to the desired OU (replace "OU=YourOU,DC=yourdomain,DC=com" with the actual OU path)
+$ouPath = "OU=YourOU,DC=yourdomain,DC=com"
+New-GPLink -Name $gpoName -Target $ouPath -LinkEnabled Yes
+
+# Define the registry settings to execute the PowerShell script during logon
+$regKeyPath = "HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\$($gpo.Id)\User\Scripts\Logon\0"
+$regValueName = "Script"
+$regValueType = "String"
+$regValueData = $scriptPath
+
+# Set the registry value in the GPO
+Set-GPRegistryValue -Name $gpoName -Key $regKeyPath -ValueName $regValueName -Type $regValueType -Value $regValueData
+
+# Optional: Force a Group Policy update on the targeted computers to apply the GPO immediately
+# Invoke-GPUpdate -Computer "Computer1", "Computer2" -RandomDelayInMinutes 0
+
+Write-Output "Group Policy '$gpoName' has been applied and will run the script during user logon."
+
