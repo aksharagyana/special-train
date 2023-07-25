@@ -71,7 +71,7 @@ Write-Host "The file has been copied to the user desktop."
 
 
 
- Define the name of the new Group Policy Object
+# Define the name of the new Group Policy Object
 $gpoName = "MyLoginScriptGPO"
 
 # Define the path to the PowerShell script to run during logon
