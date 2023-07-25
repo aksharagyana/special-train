@@ -31,3 +31,17 @@ $regKeyHttps = $regKey -f 'https'
 Set-ItemProperty -Path $regKeyFtp -Name ProgId -Value "ChromeHTML"
 Set-ItemProperty -Path $regKeyHttp -Name ProgId -Value "ChromeHTML"
 Set-ItemProperty -Path $regKeyHttps -Name ProgId -Value "ChromeHTML"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<DefaultAssociations>
+  <Association Identifier=".htm" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
+  <Association Identifier=".html" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
+  <Association Identifier="http" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
+  <Association Identifier="https" ProgId="ChromeHTML" ApplicationName="Google Chrome" />
+</DefaultAssociations>
+
+$RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+$Name = "DefaultAssociationsConfiguration"
+$value = '\\NetworkShare\EDGE\defaultapplication.XML'
+
+New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType String -Force | Out-Null
