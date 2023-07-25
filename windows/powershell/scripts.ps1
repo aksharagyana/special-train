@@ -82,8 +82,8 @@ $gpo = New-Object -TypeName Microsoft.GroupPolicy.Management.GPO
 $gpo.Name = $gpoName
 
 # Link the GPO to the desired OU (replace "OU=YourOU,DC=yourdomain,DC=com" with the actual OU path)
-$ouPath = "OU=YourOU,DC=yourdomain,DC=com"
-Set-GPLink -Name "MyGPO" -Target "OU=YourOU,DC=yourdomain,DC=com" -LinkEnabled Yes
+$gpo.Link = "OU=YourOU,DC=yourdomain,DC=com"
+$gpo.LinkEnabled = $true
 
 # Define the registry settings to execute the PowerShell script during logon
 $regKeyPath = "HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\$($gpo.Id)\User\Scripts\Logon\0"
