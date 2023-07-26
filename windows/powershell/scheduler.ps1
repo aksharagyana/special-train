@@ -1,6 +1,19 @@
 # Define the path to the PowerShell script you want to execute on user logon
 $scriptPath = "C:\Path\To\Your\Script.ps1"
 
+# Define the path to the source file you want to copy
+$sourceFilePath = "C:\Path\To\Your\SourceFile.txt"
+
+# Define the path to the destination folder where you want to copy the file
+$destinationFolderPath = "C:\Path\To\Your\DestinationFolder"
+
+# Define the PowerShell command to execute (Copy-Item command)
+$powerShellCommand = "Copy-Item -Path `"$sourceFilePath`" -Destination `"$destinationFolderPath`" -Force"
+
+# Define the action to run the PowerShell command
+$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument $powerShellCommand
+
+
 # Define the action to run the PowerShell script
 $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-File `"$scriptPath`""
 
