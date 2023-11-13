@@ -17,3 +17,10 @@ Invoke-WebRequest -Uri $zipUrl -OutFile "$downloadPath\yourfile.zip"
 
 # Unzip the downloaded file to the extraction path
 Expand-Archive -Path "$downloadPath\yourfile.zip" -DestinationPath $extractPath
+
+
+# Get the folder that starts with "FSLogix_Apps"
+$folderName = (Get-ChildItem -Directory -Path "C:\Path\To\ParentFolder" -Filter "FSLogix_Apps*").Name
+
+# Output the folder name
+Write-Host "The folder name is: $folderName"
