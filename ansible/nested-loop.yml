@@ -1,0 +1,27 @@
+---
+- name: Loop over certificate data structure
+  hosts: localhost
+  gather_facts: false
+  vars:
+    certs:
+      - env: dev
+        servers:
+          - server1
+          - server2
+
+      - env: prod
+        servers:
+          - server3
+          - server4
+
+  tasks:
+    - name: Display certificate information
+      debug:
+        msg: "Environment: {{ item.env }}, Server: {{ server }}"
+      with_items: "{{ certs }}"
+      loop_control:
+        loop_var: item_outer
+      with_nested:
+        - "{{ item_outer.servers }}"
+      loop_control:
+        loop_var: server
