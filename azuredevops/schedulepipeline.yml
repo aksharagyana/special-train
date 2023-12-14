@@ -1,0 +1,17 @@
+trigger:
+- none
+
+schedules:
+- cron: "0 18 * * 1-5"  # 0 minutes, 18 hours (7 PM BST), every day from Monday to Friday
+  displayName: 'Daily at 7 PM BST'
+  branches:
+    include:
+    - main  # Adjust branch name as needed
+
+jobs:
+- job: MyScheduledJob
+  displayName: 'Scheduled Job'
+  pool:
+    vmImage: 'windows-latest'  # Adjust as needed
+  steps:
+  - script: echo "This job runs at 7 PM BST from Monday to Friday"
