@@ -1,0 +1,11 @@
+---
+- name: Read INI file
+  hosts: localhost
+  tasks:
+    - name: Load section from variable
+      set_fact:
+        target_section: "Section1"
+
+    - name: Read INI file and retrieve value
+      debug:
+        msg: "{{ lookup('ini', 'file=config.ini section=' ~ target_section ~ ' key=Key1') }}"
