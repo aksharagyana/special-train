@@ -1,0 +1,11 @@
+---
+- name: Install logrotate package
+  ansible.builtin.package:
+    name: logrotate
+    state: present
+
+- name: Create logrotate configuration
+  ansible.builtin.template:
+    src: logrotate.conf.j2
+    dest: /etc/logrotate.d/your_logs
+    mode: '0644'
