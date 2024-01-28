@@ -1,0 +1,14 @@
+/path/to/your/logs/*.log {
+    daily
+    rotate 3
+    missingok
+    notifempty
+    create 0644 root root
+    dateext
+    dateformat -%Y%m%d
+    compress
+    delaycompress
+    lastaction
+        find /path/to/your/logs/*.log -mtime +3 -exec rm {} \;
+    endscript
+}
