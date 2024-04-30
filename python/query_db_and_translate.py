@@ -1,5 +1,6 @@
 # If not already installed, install necessary libraries
-# !pip install pandas googletrans==4.0.0-rc1 pyodbc
+# apt-get update && apt-get install g++ unixodbc-dev
+# pip install pandas googletrans==4.0.0-rc1 pyodbc
 
 
 import pandas as pd
