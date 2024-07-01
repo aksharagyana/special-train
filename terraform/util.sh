@@ -1,4 +1,4 @@
-`function tf-compliance { docker run --rm -v $(pwd):/target -i -t eerkunt/terraform-compliance --features tests/ --planfile plan-out.json "$@"; }
+function tf-compliance { docker run --rm -v $(pwd):/target -i -t eerkunt/terraform-compliance --features tests/ --planfile plan-out.json "$@"; }
 function lz-docs-gen {  docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.18.0 markdown document /terraform-docs/module --output-file /terraform-docs/README.md --config /terraform-docs/.terraform-docs.yml; }
 function mdocs-gen { docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.18.0 markdown document /terraform-docs --output-file /terraform-docs/README.md --config /terraform-docs/.terraform-docs.yml; }
 
