@@ -11,14 +11,16 @@ function Test-Url {
         [string]$url
     )
     try {
-        # Create a web request
-        $request = [System.Net.WebRequest]::Create($url)
-        $request.Method = "HEAD"
-        $response = $request.GetResponse()
-        $response.Close()
+        # Send a HEAD request using Invoke-RestMethod
+        $response = Invoke-RestMethod -Uri $url -Method Head -UseBasicParsing -TimeoutSec 5
         return $true
     } catch {
-        return $false
+        # If an error occurs, check the status code
+        if ($_.Exception.Response.StatusCode -ge 400 -and $_.Exception.Response.StatusCode -le 599) {
+            return $true
+        } else {
+            return $false
+        }
     }
 }
 
