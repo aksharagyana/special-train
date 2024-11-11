@@ -1,0 +1,15 @@
+Ticket Title: Set up Azure Application Gateway with WAF for enhanced security
+
+Description: We need to create an Azure Application Gateway with an integrated Web Application Firewall (WAF) to provide application-level protection against common web exploits. This will enhance the security of our applications hosted on Azure by preventing attacks such as SQL injection, cross-site scripting, and others as defined by the OWASP top ten.
+
+The Application Gateway with WAF should be configured with the appropriate settings for our environment, including URL-based routing, SSL termination, and appropriate WAF policies to ensure our application is protected from malicious attacks while maintaining performance.
+
+Tasks:
+
+Create an Azure Application Gateway with the WAF tier.
+Configure URL-based routing rules as needed for our applications.
+Enable SSL termination and import the SSL certificate for secure HTTPS traffic.
+Set up the WAF policy to apply OWASP rules.
+Set up custom rules if needed, based on application requirements.
+Verify that the WAF is logging traffic and correctly blocking suspicious activities.
+Test the Application Gateway and WAF integration.
