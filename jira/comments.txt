@@ -1,0 +1,8 @@
+We encountered some issues while executing the Cloud Builder. The software packages on Azure failed, and the project team recommended reinstalling the failed components. Since Cloud Builder doesn’t allow selective installation, I had to wipe and reinstall everything.
+
+To address the failures during installation, I used an iterative A/B testing approach. This helped us make some progress, and we now have the portal running successfully at:
+https://googlr.com/portal/home
+
+However, we’re facing an issue with the /server URI. It seems to be related to federation, but unfortunately, we have limited documentation to troubleshoot this.
+
+I’ve reached out to the project team for support, and shiva has kindly set up a meeting to discuss the details of the issue.
