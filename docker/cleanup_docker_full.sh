@@ -24,4 +24,9 @@ docker network rm $(docker network ls --filter "type=custom" -q)
 echo "Pruning unused Docker resources..."
 docker system prune -af
 
+# Remove any build hostory
+echo "Removing all Docker build history..."
+docker buildx history rm --all
+
+
 echo "Cleanup complete: All containers, images, volumes, and networks have been removed."
