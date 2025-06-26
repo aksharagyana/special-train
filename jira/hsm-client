@@ -1,0 +1,57 @@
+Here’s a well-structured **Jira ticket** to track and resolve the HSM client issue with your encryption service:
+
+---
+
+**Title:**
+🔧 Investigate and Fix HSM Client Issue in Encryption Service (Docker Image Fails to Start)
+
+**Type:**
+Bug / Task
+
+**Priority:**
+High
+
+**Description:**
+The Helm chart for the encryption service includes all required configurations to enable HSM (Hardware Security Module) client integration. However, the Docker image fails to start and does not stay alive after deployment.
+
+This indicates that the issue is not with the Helm configuration but may lie within the application startup, runtime environment, or Docker image build process. A holistic investigation is required to isolate and resolve the root cause.
+
+---
+
+**Problem Summary:**
+
+* Helm chart includes all necessary environment variables, volume mounts, and secrets for HSM integration
+* Encryption service container crashes or fails liveness/startup checks
+* Logs suggest the application is not initializing the HSM client correctly
+
+---
+
+**Tasks:**
+
+* [ ] Confirm Helm chart values are correctly passed into the pod
+* [ ] Validate if required HSM libraries (e.g., PKCS#11, CloudHSM libraries) are present in the Docker image
+* [ ] Check entrypoint or startup scripts for missing HSM initialization logic
+* [ ] Investigate application logs for root cause (e.g., library path issues, credentials, permissions)
+* [ ] Test the Docker image independently (e.g., via `docker run`) outside Kubernetes to isolate the issue
+* [ ] Patch the Dockerfile or application code as needed to ensure compatibility with the HSM setup
+* [ ] Redeploy via Helm and validate that the service initializes and remains healthy
+* [ ] Document findings and root cause for future reference
+
+---
+
+**Acceptance Criteria:**
+
+* [ ] Encryption service successfully starts and integrates with HSM
+* [ ] No crash/restart loop
+* [ ] Helm chart values result in a functional deployment
+* [ ] Application logs show successful HSM initialization
+* [ ] Clear documentation or README update if image changes are required
+
+---
+
+**Labels:**
+`bug`, `encryption`, `HSM`, `docker`, `helm`, `urgent`
+
+---
+
+Let me know if you want this ticket broken down further into subtasks or aligned with a specific CI/CD or team workflow.
