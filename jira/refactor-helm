@@ -1,0 +1,43 @@
+Here’s a sample **Jira ticket** you can use to document the task of refactoring your Helm chart for better reuse of values:
+
+---
+
+**Title:**
+🔧 Refactor Helm Chart to Reuse Common Values
+
+**Type:**
+Task / Improvement
+
+**Priority:**
+Medium
+
+**Description:**
+The current Helm chart contains repeated or hardcoded values across multiple templates (e.g., labels, image references, resource limits, etc.). To improve maintainability and reduce duplication, we should refactor the chart to extract these into reusable `.Values` entries in `values.yaml`.
+
+**Acceptance Criteria:**
+
+* [ ] Identify repeated values across Helm templates (e.g., `deployment.yaml`, `service.yaml`, etc.)
+* [ ] Move repeated values into `values.yaml` with clear, meaningful keys
+* [ ] Replace hardcoded values in templates with `{{ .Values.* }}` references
+* [ ] Test the chart to ensure functionality remains unchanged after the refactor
+* [ ] Validate backward compatibility if applicable (e.g., for CI/CD or other consumers)
+
+**Examples of values to extract (not exhaustive):**
+
+* `image.repository`, `image.tag`
+* `resources.limits` / `resources.requests`
+* Common `labels` or `annotations`
+* `replicaCount`
+* Port numbers, service names
+
+**Additional Notes:**
+
+* Consider creating helper templates in `_helpers.tpl` for common metadata if needed (e.g., `include "chart.fullname" .`)
+* Follow Helm chart best practices from [https://helm.sh/docs/chart\_best\_practices/](https://helm.sh/docs/chart_best_practices/)
+
+**Labels:**
+`helm`, `refactor`, `tech-debt`
+
+---
+
+Let me know if you'd like this turned into YAML for use in automation, or tailored for a specific Jira workflow template.
