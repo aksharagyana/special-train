@@ -1,0 +1,14 @@
+{{- define "utils.toHyphenTitleCase" -}}
+{{- $input := . | toString -}}
+{{- $parts := split "-" $input -}}
+{{- $capitalized := list -}}
+{{- range $parts }}
+  {{- $first := upper (substr . 0 1) -}}
+  {{- $rest := "" -}}
+  {{- if gt (len .) 1 }}
+    {{- $rest = substr . 1 (sub (len .) 1) -}}
+  {{- end }}
+  {{- $capitalized = append $capitalized (printf "%s%s" $first $rest) -}}
+{{- end -}}
+{{- join "-" $capitalized -}}
+{{- end }}
