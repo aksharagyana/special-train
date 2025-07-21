@@ -1,0 +1,32 @@
+Here’s a clear and Jira-appropriate **summary** and **description** for your task:
+
+---
+
+### **Jira Summary:**
+
+Create Kafka Secrets Only for Supported Environments (Starting with Dev)
+
+---
+
+### **Jira Description:**
+
+As part of the Kafka infrastructure setup, we need to implement environment-specific secret creation logic in Terraform.
+
+Currently, DevOps support is available only for the **`dev`** environment. Therefore, Kafka-related secrets and AWS KMS keys must only be created in this environment initially. However, as the development matures and support is extended to higher environments (e.g., `qa`, `staging`, and eventually `prod`), this logic should be easily extendable.
+
+#### **Requirements:**
+
+* Implement a feature flag or conditional logic in Terraform to control secret and KMS key creation per environment.
+* Ensure secrets and AWS KMS keys are created **only in supported environments**.
+* The current implementation must support only `dev`, but be flexible to allow addition of higher environments in the future.
+* All secrets and KMS resources must be managed via Terraform.
+
+#### **Notes:**
+
+* Avoid creating secrets in unsupported environments.
+* Follow DevOps naming conventions and tagging standards for all AWS resources.
+* Consider using a reusable module or pattern for future extensibility.
+
+---
+
+Let me know if you’d like this tailored for a specific Jira project format or with acceptance criteria.
